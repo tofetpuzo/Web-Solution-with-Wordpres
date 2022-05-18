@@ -65,10 +65,32 @@ After the physical volumes are created, these PV are then added to a volume grou
 
 The next step is to use lvcreate utility to create a two logical volumes such as apps-lv and logs-lv for the remaining space of the pv size.
 `sudo lvcreate -n apps-lv -L 1.5G webdata-vg`
+
+
 `sudo lvcreate -n logs-lv -L 1.5G webdata-vg`
 
 To verify the entire setup
 `sudo vgdisplay -v` #view complete setup -VG, PV and LV
 
 `sudo lsblk`
+
 ![elastic7](./images/lv-complete.png)
+
+
+The next step is to create a file system the ext4 is used to format the logical volumes with ext4 filesystem.
+
+`sudo mkfs -t ext4 /dev/webdata-vg/apps-lv`
+
+`sudo mkfs -t ext4 /dev/webdata-vg/logs-lv`
+
+
+## Creating directory to store website files for a Web-Server.
+
+The first step is to create a directory using this command.
+`sudo mkdir -p /var/www/html`
+
+The next step is to create a recovery directory to store backup of log data
+`sudo mkdir -p /home/recovery/logs`
+
+After creating these directories the next step is to mount directory to apps-lv logical volume using this command.
+`sudo mount /dev/webdata-vg/apps-lv /var/www/html`

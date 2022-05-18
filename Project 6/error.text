@@ -8,3 +8,6 @@ Solutions:
 4. yum update -y
 
 If the commands does not work repeat the steps again some dependencies were later updated.
+
+Filesystem UUID: b843a111-737a-484e-8456-15e8e013b6c8 apps-lv
+UUID: b6c01323-e234-4fec-ba6d-33ffa151110a

@@ -109,5 +109,15 @@ The next crucial step is to input all the blk-ids to the /etc/fstab in the forma
 
 `sudo vi /etc/fstab`
 
-![elastic9](./images/fstab.png)
+![elastic8](./images/fstab.png)
+
+After updating the etc/fstab , we then configure and reload the daemon using the following commands
+
+`sudo mount -a`
+
+`sudo systemctl daemon-reload`
+
+The final step here is to verify the step-up using the command: `df -h`
+![elastic8](./images/setup-complete.png)
+
 

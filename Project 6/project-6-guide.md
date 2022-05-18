@@ -77,7 +77,7 @@ To verify the entire setup
 ![elastic7](./images/lv-complete.png)
 
 
-The next step is to create a file system the ext4 is used to format the logical volumes with ext4 filesystem.
+The next step is to create a file system, the ext4 is used to format the logical volumes with ext4 filesystem.
 
 `sudo mkfs -t ext4 /dev/webdata-vg/apps-lv`
 
@@ -92,5 +92,14 @@ The first step is to create a directory using this command.
 The next step is to create a recovery directory to store backup of log data
 `sudo mkdir -p /home/recovery/logs`
 
-After creating these directories the next step is to mount directory to apps-lv logical volume using this command.
+After creating, these directories the next step is to mount directory to apps-lv logical volume using this command.
 `sudo mount /dev/webdata-vg/apps-lv /var/www/html`
+
+Before doing, this above command we have to use rsync utility to backup all the files in the log directory /var/log into /home/recovery/logs 
+
+`sudo rsync -av /var/log/. /home/recovery/logs/`
+
+The step is to mount /var/log on logs-lv logical volume. 
+`sudo mount /dev/webdata-vg/logs-lv /var/log`
+
+After during this the /etc/fstab file so that the mount configuration will persist after restart of the server.

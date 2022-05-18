@@ -44,3 +44,6 @@ The last step is to use the `lsblk` command to see that the partition has been c
 ![elastic3](./images/partitioncomplete.png)
 
 The next step is to install lvm2 on the web-server using this command
+`sudo yum install lvm2`
+
+![elastic3](./images/pvc_created.png)

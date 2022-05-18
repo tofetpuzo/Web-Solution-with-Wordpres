@@ -31,6 +31,16 @@ This opens a partition interface for creating a partition
 ![elastic](./images/part_inf.png)
 
 The next command is "p" this shows the information about that particular disk or volume.
-![elastic](./images/part.png)
+![elastic2](./images/part.png)
 
-To create a new partition , the command "n" has used and this was done for other 2 volumes that is attached to this particular web server.
+To create a new partition , the command "n" was used and this was done for the other 2 volumes that was attached to this particular web server.
+The next command is to put p which is the primary
+![elastic3](./images/create_new_volume.png)
+
+To effect the change the "w" command has to be used. 
+![elastic3](./images/complete.png)
+
+The last step is to use the `lsblk` command to see that the partition has been correctly specified. 
+![elastic3](./images/partitioncomplete.png)
+
+The next step is to install lvm2 on the web-server using this command

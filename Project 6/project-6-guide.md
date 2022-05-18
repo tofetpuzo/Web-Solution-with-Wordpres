@@ -38,12 +38,37 @@ The next command is to put p which is the primary
 ![elastic3](./images/create_new_volume.png)
 
 To effect the change the "w" command has to be used. 
-![elastic3](./images/complete.png)
+![elastic4](./images/complete.png)
 
 The last step is to use the `lsblk` command to see that the partition has been correctly specified. 
-![elastic3](./images/partitioncomplete.png)
+![elastic5](./images/partitioncomplete.png)
 
+
+### Creating a Physical Partition for a Web-Server
 The next step is to install lvm2 on the web-server using this command
-`sudo yum install lvm2`
+`sudo yum install lvm2` 
 
-![elastic3](./images/pvc_created.png)
+`sudo pvs`
+
+![elastic6](./images/pvc_created.png)
+
+
+### Creating a Volume group for a Web-Server
+
+After the physical volumes are created, these PV are then added to a volume group(VG). I named the VG : webdata-vg, by running this command.
+
+`sudo vgcreate webdata-vg /dev/xvdf1 /dev/xvdg1 /dev/xvdh1`
+![elastic7](./images/vgs.png)
+
+
+### Creating a Logical volumes for a Web-Server
+
+The next step is to use lvcreate utility to create a two logical volumes such as apps-lv and logs-lv for the remaining space of the pv size.
+`sudo lvcreate -n apps-lv -L 1.5G webdata-vg`
+`sudo lvcreate -n logs-lv -L 1.5G webdata-vg`
+
+To verify the entire setup
+`sudo vgdisplay -v` #view complete setup -VG, PV and LV
+
+`sudo lsblk`
+![elastic7](./images/lv-complete.png)

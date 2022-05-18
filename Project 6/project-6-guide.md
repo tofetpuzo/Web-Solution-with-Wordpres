@@ -102,4 +102,12 @@ Before doing, this above command we have to use rsync utility to backup all the 
 The step is to mount /var/log on logs-lv logical volume. 
 `sudo mount /dev/webdata-vg/logs-lv /var/log`
 
-After during this the /etc/fstab file so that the mount configuration will persist after restart of the server.
+The /etc/fstab file must be update so that the mount configuration will persist after restart of the server.
+
+The next crucial step is to input all the blk-ids to the /etc/fstab in the format in the screenshot below, but first run this command to get all the ids. 
+`sudo blkid`
+
+`sudo vi /etc/fstab`
+
+![elastic9](./images/fstab.png)
+

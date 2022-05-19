@@ -48,6 +48,9 @@ The last step is to use the `lsblk` command to see that the partition has been c
 The next step is to install lvm2 on the web-server using this command
 `sudo yum install lvm2` 
 
+`sudo lvmdiskscan` 
+`sudo pvcreate /dev/xvdf1 /dev/xvdg1 /dev/xvdh1`
+
 `sudo pvs`
 
 ![elastic6](./images/pvc_created.png)
@@ -68,6 +71,8 @@ The next step is to use lvcreate utility to create a two logical volumes such as
 
 
 `sudo lvcreate -n logs-lv -L 1.5G webdata-vg`
+
+`sudo lvs`
 
 To verify the entire setup
 `sudo vgdisplay -v` #view complete setup -VG, PV and LV
@@ -111,13 +116,20 @@ The next crucial step is to input all the blk-ids to the /etc/fstab in the forma
 
 ![elastic8](./images/fstab.png)
 
-After updating the etc/fstab , we then configure and reload the daemon using the following commands
+After updating the etc/fstab, we then configure and reload the daemon using the following commands
 
 `sudo mount -a`
 
 `sudo systemctl daemon-reload`
 
 The final step here is to verify the step-up using the command: `df -h`
-![elastic8](./images/setup-complete.png)
+![elastic9](./images/setup-complete.png)
+
+
+
+## Creating and configuring the Database.
+The 
+
+
 
 

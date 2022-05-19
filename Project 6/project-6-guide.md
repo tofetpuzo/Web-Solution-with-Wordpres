@@ -138,6 +138,7 @@ NB: There is a directory called /var/db that should be rsync should be applied t
 `sudo yum -y update`
 
 2. Install wget, Apache and its dependencies
+`sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
 
 3. Start Apache
 `sudo systemctl enable httpd`
@@ -172,9 +173,23 @@ NB: There is a directory called /var/db that should be rsync should be applied t
 `sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R`
 `sudo setsebool -P httpd_can_network_connect=1`
 
-## Creating and configuring the Database on Web-server.
+## Creating and configuring the Database Server.
+The first step is to install and configure mySQL using the following commands
 
+1. `sudo yum update` 
+2. `sudo yum install mysql-server`
+3. `sudo systemctl restart mysqld` 
+4. `sudo systemctl enable mysqld`
 
+## Configuring the Database to work with WordPress.
+sudo mysql
+CREATE DATABASE wordpress;
+CREATE USER 'centos'@'ip' IDENTIFIED BY 'mypass';
+GRANT ALL ON wordpress.* TO 'centos'@'ip';
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+exit
 
+## Configuring the Wordpress to connect to the Database Server.
 
-
+To allow connection between mySQL and wordpress, I opened port 3306 on the DB server EC2. To ensure that there is extra security, I ensured that I allowed access to the DB server only from the web-server ip address, so that in the inbound rule configuration is specified as /32

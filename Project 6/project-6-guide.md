@@ -134,6 +134,8 @@ The configurations done for the web-server was replicated for Database.
 
 NB: There is a directory called /var/db that should be rsync should be applied too
 
+sudo mount /dev/wordpressdb-vg/logs-lv /var/log
+
 
 ## Creating and configuring the Wordpress on Web-server.
 1. The first step is to update the repository, using this command:
@@ -146,7 +148,7 @@ NB: There is a directory called /var/db that should be rsync should be applied t
 `sudo systemctl enable httpd`
 `sudo systemctl start httpd`
 
-4. To install PHP and it’s depemdencies
+4. To install PHP and it’s dependencies
 `sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`
 
 
@@ -239,6 +241,12 @@ To allow connection between mySQL and wordpress, I opened port 3306 on the DB se
 2. I verified if I can successfully execute SHOW DATABASES; command and see a list of existing databases.
 
 3. I changed permissions and configuration so Apache could use WordPress:
+
+- The first step that is required is to edit the config file.
+    - cd to the wordpress package you have downloaded,
+    - extract the wordpress  tar -xvzf "filename"
+    - make a copy of the cp wordpress/wp-config-sample.php wordpress/wp-config.php
+    - 
 
 4. I enabled TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 

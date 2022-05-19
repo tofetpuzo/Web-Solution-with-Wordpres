@@ -194,8 +194,14 @@ exit
 
 To allow connection between mySQL and wordpress, I opened port 3306 on the DB server EC2. To ensure that there is extra security, I ensured that I allowed access to the DB server only from the web-server ip address, so that in the inbound rule configuration is specified as /32
 1. Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
-sudo yum install mysql
-sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
+
+
+`sudo yum install mysql`
+`sudo mysql -h "172.31.15.158" -u 'me' -p`
+
+![elastic10](./images/mysql.png)
+
+
 2. I verified if I can successfully execute SHOW DATABASES; command and see a list of existing databases.
 
 3. I changed permissions and configuration so Apache could use WordPress:

@@ -184,8 +184,8 @@ The first step is to install and configure mySQL using the following commands
 ## Configuring the Database to work with WordPress.
 sudo mysql
 CREATE DATABASE wordpress;
-CREATE USER 'centos'@'ip' IDENTIFIED BY 'mypass';
-GRANT ALL ON wordpress.* TO 'centos'@'ip';
+CREATE USER me@172.11.1.128 IDENTIFIED BY 'password@123';
+GRANT ALL PRIVILEGES ON *.* TO 'me'@'172.661.1.158';
 FLUSH PRIVILEGES;
 SHOW DATABASES;
 exit
@@ -193,3 +193,13 @@ exit
 ## Configuring the Wordpress to connect to the Database Server.
 
 To allow connection between mySQL and wordpress, I opened port 3306 on the DB server EC2. To ensure that there is extra security, I ensured that I allowed access to the DB server only from the web-server ip address, so that in the inbound rule configuration is specified as /32
+1. Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
+sudo yum install mysql
+sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
+2. I verified if I can successfully execute SHOW DATABASES; command and see a list of existing databases.
+
+3. I changed permissions and configuration so Apache could use WordPress:
+
+4. I enabled TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
+
+5. Try to access from your browser the link to your WordPress http://<Web-Server-Public-IP-Address>/wordpress/

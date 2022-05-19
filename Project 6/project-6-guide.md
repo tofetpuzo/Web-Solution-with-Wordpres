@@ -18,6 +18,8 @@ The web server volumes were verified using the command `ls /dev/`
 ![elastic](./images/blks.png)
 
 The next step, I took was to use the `df -h` command to see all mounts and free space on the web server. The output is shown below after running this command.
+
+
 ![elastic](./images/disk.png)
 
 

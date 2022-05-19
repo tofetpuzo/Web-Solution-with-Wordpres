@@ -246,7 +246,13 @@ To allow connection between mySQL and wordpress, I opened port 3306 on the DB se
     - cd to the wordpress package you have downloaded,
     - extract the wordpress  tar -xvzf "filename"
     - make a copy of the cp wordpress/wp-config-sample.php wordpress/wp-config.php
-    - 
+    - vi into wordpress/wp-config.php
+    - change the database name, user, password into the file.
+    - visit this website for configuration https://api.wordpress.org/secret-key/1.1/salt/
+    - copy the information, paste and save it into the file
+    - cd to the httpd(apache2) go to the "conf" directory 
+    - do this "cp httpd.conf httpd.conf.org"
+    -
 
 4. I enabled TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 

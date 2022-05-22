@@ -197,11 +197,11 @@ sudo mount /dev/wordpressdb-vg/logs-lv /var/log
 `cp wordpress/wp-config-sample.php wordpress/wp-config.php`
 
 
-`cp -R wordpress /var/www/html/`
+`cp -R wordpress /var/www/`
 
 
 7. Configure SELinux Policies
-`sudo chown -R apache:apache /var/www/html/wordpress`
+`sudo chown -R apache:apache /var/www/wordpress`
 
 
 `sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R`
@@ -252,8 +252,27 @@ To allow connection between mySQL and wordpress, I opened port 3306 on the DB se
     - copy the information, paste and save it into the file
     - cd to the httpd(apache2) go to the "conf" directory 
     - do this "cp httpd.conf httpd.conf.org"
-    -
+    - sudo chmod -Rf 775 ./wordpress/
+    - sudo semange fcontect -a -t httpd_sys_rw_content_t \ "/var/ww/wordpress(/.*)?"
+    - sudo restorecon -Rv /var/www/wordpress
+    - sudo vi /etc/httpd/conf.d/wordpress.conf
+
+    - <VirtualHost *:80>
+        ServerAdmin root@localhost
+        DocumentRoot /var/www/wordpress
+        <Directory "/var/www/wordpress">
+             Options Indexes FollowSymLinks
+             AllowOverride all
+            Require all granted
+        </Directory>
+        ErrorLog /var/log/httpd/wordpress_error.log
+        CustomLog /var/log/httpd/wordpress_access.log common
+      </VirtualHost>
+    -  sudo systemctl restart httpd
+
+
+    ![elastic10](./images/wordpress.png)
 
 4. I enabled TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
-5. Try to access from your browser the link to your WordPress http://<Web-Server-Public-IP-Address>/wordpress/
+5. Try to access from your browser the link to your WordPress http://Web-Server-Public-IP-Address
